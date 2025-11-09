@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!-- rgb(0, 255, 13) -->
+<html>
+    <meta charset = "UTF-8">
+    <meta name = 'viewport' content = 'width=device-width, initial - scale = 1.0'>
+    <title>Vehicle CO2 Emission Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body{
+            background-image: url('how-to-reduce-vehicle-pollution-in-india.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Comic Sans Ms';
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container{
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgb(0, 0, 0, 0.5);
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1{
+            text-align: center;
+            color: rgb(9, 255, 0);
+        }
+        
+        form{
+            margin-top: 20px;
+        }
+        
+        label{
+            color: rgb(9, 255, 0);
+            display: block;
+            margin-bottom: bold;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid gray;
+            border-radius: 20px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        
+        input[type="submit"] {
+            background-color: rgb(9, 255, 0);
+            color: black;
+            font-weight: bold;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #ed8b03;
+        }
+        
+        .output {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+    <body>
+        <div class="container">
+            <h1>Vehicle CO2 Emission Prediction</h1>
+            <form action="/predict" method="post">
+                <label for="Vehicle Brand">Vehicle Brand:</label>
+                <select required>
+                    <option value="ACURA">ACURA</option>
+                    <option value="ALFA ROMEO">ALFA ROMEO</option>
+                    <option value="ASTON MARTIN">ASTON MARTIN</option>
+                    <option value="AUDI">AUDI</option>
+                    <option value="BENTLEY">BENTLEY</option>
+                    <option value="BMW">BMW</option>
+                    <option value="BUGATTI">BUGATTI</option>
+                    <option value="BUICK">BUICK</option>
+                    <option value="CADILLAC">CADILLAC</option>
+                    <option value="CHEVROLET">CHEVROLET</option>
+                    <option value="CHRYSLER">CHRYSLER</option>
+                    <option value="DODGE">DODGE</option>
+                    <option value="FIAT">FIAT</option>
+                    <option value="FORD">FORD</option>
+                    <option value="GENESIS">GENESIS</option>
+                    <option value="GMC">GMC</option>
+                    <option value="HONDA">HONDA</option>
+                    <option value="HYUNDAI">HYUNDAI</option>
+                    <option value="INFINITI">INFINITI</option>
+                    <option value="JAGUAR">JAGUAR</option>
+                    <option value="JEEP">JEEP</option>
+                    <option value="KIA">KIA</option>
+                    <option value="LAMBORGHINI">LAMBORGHINI</option>
+                    <option value="LAND ROVER">LAND ROVER</option>
+                    <option value="LEXUS">LEXUS</option>
+                    <option value="LINCOLN">LINCOLN</option>
+                    <option value="MASERATI">MASERATI</option>
+                    <option value="MAZDA">MAZDA</option>
+                    <option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
+                    <option value="MINI">MINI</option>
+                    <option value="MITSUBISHI">MITSUBISHI</option>
+                    <option value="NISSAN">NISSAN</option>
+                    <option value="PORSCHE">PORSCHE</option>
+                    <option value="RAM">RAM</option>
+                    <option value="ROLLS-ROYCE">ROLLS-ROYCE</option>
+                    <option value="SCION">SCION</option>
+                    <option value="SMART">SMART</option>
+                    <option value="SRT">SRT</option>
+                    <option value="SUBARU">SUBARU</option>
+                    <option value="TOYOTA">TOYOTA</option>
+                    <option value="VOLKSWAGEN">VOLKSWAGEN</option>
+                    <option value="VOLVO">VOLVO</option>
+                </select><br>
+
+                <label for='Vehicle Class'>Vehicle Class:</label>
+                <select required>
+                    <option value="COMPACT">COMPACT</option>
+                    <option value="FULL-SIZE">FULL-SIZE</option>
+                    <option value="MID-SIZE">MID-SIZE</option>
+                    <option value="MINICOMPACT">MINICOMPACT</option>
+                    <option value="MINIVAN">MINIVAN</option>
+                    <option value="PICKUP TRUCK - SMALL">PICKUP TRUCK - SMALL</option>
+                    <option value="PICKUP TRUCK - STANDARD">PICKUP TRUCK - STANDARD</option>
+                    <option value="SPECIAL PURPOSE VEHICLE">SPECIAL PURPOSE VEHICLE</option>
+                    <option value="STATION WAGON - MID-SIZE">STATION WAGON - MID-SIZE</option>
+                    <option value="STATION WAGON - SMALL">STATION WAGON - SMALL</option>
+                    <option value="SUBCOMPACT">SUBCOMPACT</option>
+                    <option value="SUV - SMALL">SUV - SMALL</option>
+                    <option value="SUV - STANDARD">SUV - STANDARD</option>
+                    <option value="TWO-SEATER">TWO-SEATER</option>
+                    <option value="VAN - CARGO">VAN - CARGO</option>
+                    <option value="VAN - PASSENGER">VAN - PASSENGER</option>
+                </select><br>
+
+                <label for='Fuel Type'>Fuel Type:</label>
+                <select required>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Ethanol (E85)">Ethanol (E85)</option>
+                    <option value="Natural Gas">Natural Gas</option>
+                    <option value="Regular Gasoline">Regular Gasoline</option>
+                    <option value="Premium Gasoline">Premium Gasoline</option>
+                </select><br>
+
+                <label for='Transmission Type'>Transmission Type:</label>
+                <select required>
+                    <option value="Automatic">Automatic</option>
+                    <option value="Automated Manual">Automated Manual</option>
+                    <option value="Automatic with Select Shift">Automatic with Select Shift</option>
+                    <option value="Continuously Variable">Continuously Variable</option>
+                    <option value="Manual">Manual</option>
+                </select>
+                
+                <label for='Number of Gears'>Number of Gears:</label>
+                <select name="no_of_gears" id="no_of_gears">
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>                
+
+                <label for="Engine Size">Engine Size:</label>
+                <input type="number" step="0.01" placeholder="Enter the Engine Size (in Litres)" required><br>
+
+                <label for="Cylinders">Number of Cylinders:</label>
+                <input type="number" placeholder="Enter the number of Cylinders" required><br>
+
+                <label for="Fuel Consumption City Roads">Fuel Consumption in City Roads:</label>
+                <input type="number" step="0.001" placeholder="Enter the Fuel Consumption in City Roads (L/100 km)" required><br>
+
+                <label for="Fuel Consumption Highways">Fuel Consumption in Highways:</label>
+                <input type="number" step="0.001" placeholder="Enter the Fuel Consumption in Highways (L/100 km)" required><br>
+
+                <input type="submit" value="Predict Vehicle CO2 Emission">
+            </form>
+            {% if prediction_text %}
+            <div class="output">
+                <h2>{{ prediction_text }}</h2>
+            </div>
+            {% endif %}
+        </div>
+    </body>
+</html>
